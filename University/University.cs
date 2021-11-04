@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace University
+﻿namespace University
 {
     public class University
     {
         public Student[] students;
         public Teacher[] teachers;
-        public int[,] releathions; //matrix wich represent teachers and students relathions
 
         public University(Student[] students, Teacher[] teachers)
         {
             this.students = students;
             this.teachers = teachers;
-            releathions = new int[students.Length, teachers.Length];
-            
         }
 
         /// <summary>
@@ -26,7 +17,49 @@ namespace University
         /// <param name="student">Given student</param>
         public void Add(Student student)
         {
-            students.Append(student);
+            Student[] newArray = new Student[students.Length + 1];
+            for (int i = 0; i < students.Length; i++)
+            {
+                newArray[i] = students[i];
+            }
+            newArray[students.Length] = student;
+            students = newArray;
+        }
+
+        /// <summary>
+        /// Remove student from university
+        /// </summary>
+        /// <param name="student">Given student</param>
+        public void Remove(Student student)
+        {
+            int removeIndex = 0;
+            bool isContain = false;
+            for (int i = 0; i < students.Length; i++)
+            {
+
+                if (student.Equals(students[i]))
+                {
+                    removeIndex = i;
+                    isContain = true;
+                    break;
+                }
+            }
+
+            if (isContain)
+            {
+                Student[] newArray = new Student[students.Length - 1];
+                int k = 0;
+                for (int i = 0; i < newArray.Length; i++)
+                {
+                    if (i == removeIndex)
+                    {
+                        k++;
+                    }
+                    newArray[i] = students[k];
+                    k++;
+                }
+                students = newArray;
+            }
         }
 
         /// <summary>
@@ -35,47 +68,50 @@ namespace University
         /// <param name="teacher"></param>
         public void Add(Teacher teacher)
         {
-            teachers.Append(teacher);
+            Teacher[] newArray = new Teacher[teachers.Length + 1];
+            for (int i = 0; i < students.Length; i++)
+            {
+                newArray[i] = teachers[i];
+            }
+            newArray[students.Length] = teacher;
+            teachers = newArray;
         }
 
         /// <summary>
-        /// Distrib students by classes to teachers
+        /// Distrib students to teachers
         /// </summary>
-        /// <param name="classes">Given namber of classes</param>
         public void DistribStudents()
         {
-            for (int i = 0; i < students.Length; i ++)
-            {
-                releathions[i, (i+i*teachers.Length) % teachers.Length] = 1;
-            }
-        }
-
-        public void Print()
-        {
             for (int i = 0; i < students.Length; i++)
             {
-                for (int j = 0; j < teachers.Length; j++)
-                {
-                    Console.Write(releathions[i, j] + " ");
-                }
-                Console.WriteLine();
+                students[i].teacher = teachers[(i + i * teachers.Length) % teachers.Length];
             }
         }
-
+        /// <summary>
+        /// Get students list for given teacher
+        /// </summary>
+        /// <param name="teacher">Given teacher</param>
+        /// <returns>Students list for given teacher</returns>
         public Student[] GetStudentsForteacher(Teacher teacher)
         {
-            int index=0;
-            for (int i = 0; i < teachers.Length; i++)
-            {
-                if (teacher.Equals(teachers[i]))
-                    index = i;
-            }
-
-            Student[] result = new Student[0];
+            int count = 0;
             for (int i = 0; i < students.Length; i++)
             {
-                if (releathions[i, index] == 1)
-                    result.Append(students[i]);
+                if (teacher.Equals(students[i].teacher))
+                {
+                    count++;
+                }
+            }
+
+            Student[] result = new Student[count];
+            int k = 0;
+            for (int i = 0; i < students.Length; i++)
+            {
+                if (students[i].teacher == teacher)
+                {
+                    result[k] = students[i];
+                    k++;
+                }
             }
 
             return result;

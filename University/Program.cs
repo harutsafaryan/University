@@ -23,9 +23,11 @@ namespace University
             Teacher[] teachers = new Teacher[] { t1, t2, t3 };
 
             University university = new University(students, teachers);
-            university.DistribStudents();
-            university.Print();
+            Student s8 = new Student("s8", 17);
+            university.Add(s8);
+            university.Remove(s3);
 
+            university.DistribStudents();
             var list = university.GetStudentsForteacher(t2);
 
             Console.WriteLine();
