@@ -20,13 +20,18 @@ namespace University
                 students[i] = new Student($"student_{i}", rnd.Next(12, 20));
             }
 
-            University university = new University(students, teachers);
-            Student s8 = new Student("s8", 17);
+            University university = new University(students, teachers); //create university object with given students and teachers
+            Student s8 = new Student("s8", 17); 
             university.Add(s8);
             university.Remove(students[4]);
-
             university.DistribStudents();
-            var list = university.GetStudentsForteacher(teachers[4]);
+
+            //create students list for given teacher
+            Student[] studentList = university.GetStudentsForteacher(teachers[4]);
+            foreach (var student in studentList)
+            {
+                student.Print();
+            }
 
             Console.WriteLine();
         }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace University
 {
@@ -19,5 +15,13 @@ namespace University
             this.name = name;
             this.age = age;
         }
+
+        public void Print()
+        {
+            Console.WriteLine($"student name: {name}, age is: {age}, teacher is: {teacher.name}");
+        }
     }
+
+  
+
 }
