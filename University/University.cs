@@ -92,7 +92,7 @@
         /// </summary>
         /// <param name="teacher">Given teacher</param>
         /// <returns>Students list for given teacher</returns>
-        public Student[] GetStudentsForteacher(Teacher teacher)
+        public Student[] GetStudentsForTeacher(Teacher teacher)
         {
             int count = 0;
             for (int i = 0; i < students.Length; i++)
