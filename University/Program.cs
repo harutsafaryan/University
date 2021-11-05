@@ -27,7 +27,7 @@ namespace University
             university.DistribStudents();
 
             //create students list for given teacher
-            Student[] studentList = university.GetStudentsForteacher(teachers[4]);
+            Student[] studentList = university.GetStudentsForTeacher(teachers[4]);
             foreach (var student in studentList)
             {
                 student.Print();
